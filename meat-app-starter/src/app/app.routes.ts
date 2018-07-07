@@ -8,7 +8,7 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent },
     { path: 'restaurants', component: RestaurantsComponent },
-    { path: 'restaurants/id:', component: RestaurantDetailComponent },
+    { path: 'restaurants/:id', component: RestaurantDetailComponent },
     { path: 'about', component: AboutComponent }
 
 ]
