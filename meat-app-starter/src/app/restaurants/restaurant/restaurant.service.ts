@@ -1,3 +1,5 @@
+import { MenuItem } from './../../restaurant-detail/menu-item/menu-item.model';
+
 import { ErrorHandler } from './../../app.error-handler';
 
 import { Injectable } from '@angular/core';
@@ -11,6 +13,7 @@ import { Restaurant } from './restaurant.model';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map'
+
 import 'rxjs/add/operator/catch'
 
 @Injectable()
@@ -18,7 +21,7 @@ export class RestaurantsService {
 
   constructor(private http: Http) { }
   /*
-  *Tratamento de insjeçaõ http para busca restaurantes
+  *Método para busca restaurantes
   */
   restaurants(): Observable<Restaurant[]> {
     return this.http.get(`${MEAT_API}/restaurants`)
@@ -26,7 +29,7 @@ export class RestaurantsService {
       .catch(ErrorHandler.handleError)
   }
   /*
-  *Tratamento de insjeção http para busca restaurantes tratar e buscar
+  *Método para busca restaurantes tratar e buscar
   *para buscar o parametro de id de cada restaurante individialmente
   */
   restaurantById(id: string): Observable<Restaurant> {
@@ -35,12 +38,20 @@ export class RestaurantsService {
       .catch(ErrorHandler.handleError)
   }
   /*
-  *Tratamento de insjeção http para busca reviews de cada restaurante
+  *Método para busca reviews de cada restaurante
   */
-  reviewsOfRestaurant(id: string) {
+  reviewsOfRestaurant(id: string): Observable<any> {
     return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)
       .map(resolve => resolve.json())
       .catch(ErrorHandler.handleError)
   }
+   /*
+  *Método para busca reviews de cada restaurante
+  */
+ menuOfRestaurant(id: string): Observable<MenuItem[]>{
+   return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)
+   .map(resolve => resolve.json())
+   .catch(ErrorHandler.handleError)
+ }
 
 }
